@@ -244,3 +244,15 @@ Please, cite SpeechBrain if you use it for your research or business.
 }
 ```
 
+# Export
+
+In the fork, a script to trace and export speaker embedding extractor is added.
+It allows to analyze batch of audio: (batch x samples_num) and (batch,) - batched
+audio samples and original length of sequences into speaker embeddings
+(batch x 192). Model takes 16 kHz audio. Pretrained model is downloaded from
+huggingface, so one simply need to install speechbrain with dependencies and run
+tracing script:
+
+```python
+CUDA_VISIBLE_DEVICES=1 python3 create_balacoon_pretrained.py --out-dir trained_on_gpu --use-gpu
+```
