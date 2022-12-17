@@ -254,5 +254,20 @@ huggingface, so one simply need to install speechbrain with dependencies and run
 tracing script:
 
 ```python
-CUDA_VISIBLE_DEVICES=1 python3 create_balacoon_pretrained.py --out-dir trained_on_gpu --use-gpu
+CUDA_VISIBLE_DEVICES=1 python3 trace.py --audio long_audio.wav --out-dir traced_gpu/
+```
+
+Model uses features mean-variance normalization that is not traceable as graph,
+so values are hardcoded into traced model. To collect sustainable stats,
+worth running tracing with long audio file. For committed model,
+I collected 1 utterance per speaker for CMU Arctic and VCTK, total of 8 minutes of
+speech. Hardcoded stats result in slightly different embeddings comparing to one
+extracted by untraced model (with per-sentence normalization), but they are correlated.
+
+Trace can be tested with `test.py`. Checks that speaker embeddings for utterances
+from same speaker are close and that output from traced model is similar to output
+of untraced.
+
+```python
+CUDA_VISIBLE_DEVICES=1 python3 test.py
 ```
