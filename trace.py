@@ -1,8 +1,8 @@
 """
 Copyright 2022 Balacoon
 
-Script to trace pretrained inhouse speaker embedding model,
-compatible with balacoon data preparation
+Script to trace pretrained ECAPA speaker embedding model
+from SpeechBrain, compatible with balacoon data preparation
 """
 import argparse
 import logging
